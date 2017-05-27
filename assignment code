@@ -1,0 +1,35 @@
+package myPack1;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class copyFile {
+	 public static void main(String[] args) throws InterruptedException, IOException {
+	        File source = new File("/Users/admin/documents/hellotext.txt");//name of text file to be copied
+	        File dest = new File("/Users/admin/documents/Eclipse/dest.txt");//name of new text file
+
+	        //copy file using Stream
+	        copyFileUsingStream(source, dest);
+	        System.out.println("File copied");
+	              
+	        
+	 }private static void copyFileUsingStream(File source, File dest) throws IOException {
+		    InputStream is = null;//assigns inputStream to null
+		    OutputStream os = null;//assigns output stream to null
+		    try {
+		        is = new FileInputStream(source);
+		        os = new FileOutputStream(dest);
+		        byte[] buffer = new byte[1024];
+		        int length;
+		        while ((length = is.read(buffer)) > 0) {
+		            os.write(buffer, 0, length);//if length of text file is with 1024 bytes, then it rewrites the text file in another directory
+		        }
+		    } finally {
+		        is.close();//closes both
+		        os.close();
+		    }
+		}
+} 
